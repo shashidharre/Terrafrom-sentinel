@@ -6,6 +6,11 @@ provider "azurerm" {
     }
 }
 
+resource "azurerm_resource_group" "example" {
+  name     = "terraform"
+  location = "West Europe"
+}
+
 resource "azurerm_virtual_machine" "main" {
   name                  = "${var.prefix}-vm"
   location              = azurerm_resource_group.example.location
