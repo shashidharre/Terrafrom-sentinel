@@ -1,5 +1,5 @@
 ## <https://www.terraform.io/docs/providers/azurerm/index.html>
-provider "registry.terraform.io/hashicorp/azurerm" {
+provider "azurerm" {
   version = "3.0.1"
   features {}
 }
