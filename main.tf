@@ -1,6 +1,6 @@
 ## <https://www.terraform.io/docs/providers/azurerm/index.html>
 provider "azurerm" {
-  version = "=1.4.0"
+  version = "=3.58.0"
   features {}
 }
 
