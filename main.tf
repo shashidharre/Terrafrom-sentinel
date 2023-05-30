@@ -1,3 +1,8 @@
+terraform {
+  required_version = "~> 1.0"
+}
+
+
 variable "prefix" {
   default = "tfvmex"
 }
