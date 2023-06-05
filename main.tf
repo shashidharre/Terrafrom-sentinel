@@ -1,81 +1,42 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "3.0.0"
+resource "google_compute_instance" "default" {
+  name         = "virtual-machine-from-terraform"
+  machine_type = "f1-micro"
+  zone         = "us-central1-a"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
     }
   }
-}
 
+  network_interface {
+    network = "default"
 
-provider "azurerm" {
-  features {}
-}
-
-## <https://www.terraform.io/docs/providers/azurerm/r/resource_group.html>
-resource "azurerm_resource_group" "rg" {
-  name     = "TerraformTesting"
-  location = "eastus"
-}
-
-## <https://www.terraform.io/docs/providers/azurerm/r/availability_set.html>
-resource "azurerm_availability_set" "DemoAset" {
-  name                = "example-aset"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-}
-
-## <https://www.terraform.io/docs/providers/azurerm/r/virtual_network.html>
-resource "azurerm_virtual_network" "vnet" {
-  name                = "vNet"
-  address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-}
-
-## <https://www.terraform.io/docs/providers/azurerm/r/subnet.html> 
-resource "azurerm_subnet" "subnet" {
-  name                 = "internal"
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  #address_prefixes     = "10.254.0.0/24"
-}
-
-## <https://www.terraform.io/docs/providers/azurerm/r/network_interface.html>
-resource "azurerm_network_interface" "example" {
-  name                = "example-nic"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.subnet.id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-
-## <https://www.terraform.io/docs/providers/azurerm/r/windows_virtual_machine.html>
-resource "azurerm_windows_virtual_machine" "example" {
-  name                = "example-machine"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  size                = "Standard_F2"
-  admin_username      = "adminuser"
-  admin_password      = "P@$$w0rd1234!"
-  availability_set_id = azurerm_availability_set.DemoAset.id
-  network_interface_ids = [
-    azurerm_network_interface.example.id,
-  ]
-
-  os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    access_config {
+      // Include this section to give the VM an external ip address
+    }
   }
 
-  source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
+    metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Avenue Code is the leading software consulting agency focused on delivering end-to-end development solutions for digital transformation across every vertical. We pride ourselves on our technical acumen, our collaborative problem-solving ability, and the warm professionalism of our teams.!</h1></body></html>' | sudo tee /var/www/html/index.html"
+
+    // Apply the firewall rule to allow external IPs to access this instance
+    tags = ["http-server"]
+}
+
+resource "google_compute_firewall" "http-server" {
+  name    = "default-allow-http-terraform"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
   }
+
+  // Allow traffic from everywhere to instances with an http-server tag
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["http-server"]
+}
+
+output "ip" {
+  value = "${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}"
 }
