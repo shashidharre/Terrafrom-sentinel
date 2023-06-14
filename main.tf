@@ -2,7 +2,7 @@
 # with standard storage
 
 resource "google_storage_bucket" "static" {
- name          = "TF_demo_celtic-origin-388318"
+ name          = "demo-celtic-origin-388318"
  location      = "US"
  storage_class = "STANDARD"
 
