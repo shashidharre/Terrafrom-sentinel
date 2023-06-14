@@ -1,42 +1,20 @@
-resource "google_compute_instance" "default" {
-  name         = "virtual-machine-from-terraform"
-  machine_type = "f1-micro"
-  zone         = "us-central1-a"
+# Create new storage bucket in the US multi-region
+# with standard storage
 
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-9"
-    }
-  }
+resource "google_storage_bucket" "static" {
+ name          = "TF_demo"
+ location      = "US"
+ storage_class = "STANDARD"
 
-  network_interface {
-    network = "default"
-
-    access_config {
-      // Include this section to give the VM an external ip address
-    }
-  }
-
-    metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Avenue Code is the leading software consulting agency focused on delivering end-to-end development solutions for digital transformation across every vertical. We pride ourselves on our technical acumen, our collaborative problem-solving ability, and the warm professionalism of our teams.!</h1></body></html>' | sudo tee /var/www/html/index.html"
-
-    // Apply the firewall rule to allow external IPs to access this instance
-    tags = ["http-server"]
+ uniform_bucket_level_access = true
 }
 
-resource "google_compute_firewall" "http-server" {
-  name    = "default-allow-http-terraform"
-  network = "default"
+# Upload a text file as an object
+# to the storage bucket
 
-  allow {
-    protocol = "tcp"
-    ports    = ["80"]
-  }
-
-  // Allow traffic from everywhere to instances with an http-server tag
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["http-server"]
-}
-
-output "ip" {
-  value = "${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}"
+resource "google_storage_bucket_object" "default" {
+ name         = "sample_file.txt"
+ source       = "~/terraform/sample_file.txt"
+ content_type = "text/plain"
+ bucket       = google_storage_bucket.static.id
 }
