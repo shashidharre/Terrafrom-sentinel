@@ -1,0 +1,325 @@
+import "strings"
+import "types"
+
+_modules = {
+	"root": {
+		"data": {},
+		"path": [],
+		"resources": {
+			"google_storage_bucket": {
+				"static": {
+					0: {
+						"applied": {
+							"autoclass": [],
+							"cors":      [],
+							"custom_placement_config":     [],
+							"default_event_based_hold":    null,
+							"encryption":                  [],
+							"force_destroy":               false,
+							"labels":                      null,
+							"lifecycle_rule":              [],
+							"location":                    "US",
+							"logging":                     [],
+							"name":                        "TF_demo",
+							"requester_pays":              null,
+							"retention_policy":            [],
+							"storage_class":               "STANDARD",
+							"timeouts":                    null,
+							"uniform_bucket_level_access": true,
+						},
+						"destroy": false,
+						"diff": {
+							"autoclass.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"cors.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"custom_placement_config.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"default_event_based_hold": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"encryption.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"force_destroy": {
+								"computed": false,
+								"new":      "false",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"labels": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"lifecycle_rule.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"location": {
+								"computed": false,
+								"new":      "US",
+								"old":      "",
+							},
+							"logging.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"name": {
+								"computed": false,
+								"new":      "TF_demo",
+								"old":      "",
+							},
+							"project": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"public_access_prevention": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"requester_pays": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"retention_policy.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"self_link": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"storage_class": {
+								"computed": false,
+								"new":      "STANDARD",
+								"old":      "",
+							},
+							"timeouts": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"uniform_bucket_level_access": {
+								"computed": false,
+								"new":      "true",
+								"old":      "",
+							},
+							"url": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"versioning.#": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"website.#": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+			"google_storage_bucket_object": {
+				"default": {
+					0: {
+						"applied": {
+							"cache_control":       null,
+							"content":             "REDACTED_SENSITIVE",
+							"content_disposition": null,
+							"content_encoding":    null,
+							"content_language":    null,
+							"content_type":        "text/plain",
+							"customer_encryption": [],
+							"detect_md5hash":      "different hash",
+							"event_based_hold":    null,
+							"metadata":            null,
+							"name":                "sample_file.txt",
+							"source":              "~/terraform/sample_file.txt",
+							"temporary_hold":      null,
+							"timeouts":            null,
+						},
+						"destroy": false,
+						"diff": {
+							"bucket": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"cache_control": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"content": {
+								"computed": false,
+								"new":      "REDACTED_SENSITIVE",
+								"old":      "",
+							},
+							"content_disposition": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"content_encoding": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"content_language": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"content_type": {
+								"computed": false,
+								"new":      "text/plain",
+								"old":      "",
+							},
+							"crc32c": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"customer_encryption.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"detect_md5hash": {
+								"computed": false,
+								"new":      "different hash",
+								"old":      "",
+							},
+							"event_based_hold": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"kms_key_name": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"md5hash": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"media_link": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"metadata": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"name": {
+								"computed": false,
+								"new":      "sample_file.txt",
+								"old":      "",
+							},
+							"output_name": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"self_link": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"source": {
+								"computed": false,
+								"new":      "~/terraform/sample_file.txt",
+								"old":      "",
+							},
+							"storage_class": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"temporary_hold": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"timeouts": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+		},
+	},
+}
+
+module_paths = [
+	[],
+]
+
+terraform_version = "1.5.0"
+
+variables = {}
+
+module = func(path) {
+	if types.type_of(path) is not "list" {
+		error("expected list, got", types.type_of(path))
+	}
+
+	if length(path) < 1 {
+		return _modules.root
+	}
+
+	addr = []
+	for path as p {
+		append(addr, "module")
+		append(addr, p)
+	}
+
+	return _modules[strings.join(addr, ".")]
+}
+
+data = _modules.root.data
+path = _modules.root.path
+resources = _modules.root.resources

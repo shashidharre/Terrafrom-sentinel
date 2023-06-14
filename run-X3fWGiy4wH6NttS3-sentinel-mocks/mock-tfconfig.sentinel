@@ -1,0 +1,108 @@
+import "strings"
+import "types"
+
+_modules = {
+	"root": {
+		"data":    {},
+		"modules": {},
+		"outputs": {},
+		"providers": {
+			"google": {
+				"alias": {
+					"": {
+						"config": {
+							"project": "celtic-origin-388318",
+							"region":  "us-central1",
+							"zone":    "us-central1-c",
+						},
+						"references": {
+							"project": [],
+							"region":  [],
+							"zone":    [],
+						},
+						"version": "4.52.0",
+					},
+				},
+				"config": {
+					"project": "celtic-origin-388318",
+					"region":  "us-central1",
+					"zone":    "us-central1-c",
+				},
+				"references": {
+					"project": [],
+					"region":  [],
+					"zone":    [],
+				},
+				"version": "4.52.0",
+			},
+		},
+		"resources": {
+			"google_storage_bucket": {
+				"static": {
+					"config": {
+						"location":                    "US",
+						"name":                        "TF_demo",
+						"storage_class":               "STANDARD",
+						"uniform_bucket_level_access": true,
+					},
+					"provisioners": null,
+					"references": {
+						"location":                    [],
+						"name":                        [],
+						"storage_class":               [],
+						"uniform_bucket_level_access": [],
+					},
+				},
+			},
+			"google_storage_bucket_object": {
+				"default": {
+					"config": {
+						"content_type": "text/plain",
+						"name":         "sample_file.txt",
+						"source":       "~/terraform/sample_file.txt",
+					},
+					"provisioners": null,
+					"references": {
+						"bucket": [
+							"google_storage_bucket.static.id",
+							"google_storage_bucket.static",
+						],
+						"content_type": [],
+						"name":         [],
+						"source":       [],
+					},
+				},
+			},
+		},
+		"variables": {},
+	},
+}
+
+module_paths = [
+	[],
+]
+
+module = func(path) {
+	if types.type_of(path) is not "list" {
+		error("expected list, got", types.type_of(path))
+	}
+
+	if length(path) < 1 {
+		return _modules.root
+	}
+
+	addr = []
+	for path as p {
+		append(addr, "module")
+		append(addr, p)
+	}
+
+	return _modules[strings.join(addr, ".")]
+}
+
+data = _modules.root.data
+modules = _modules.root.modules
+providers = _modules.root.providers
+resources = _modules.root.resources
+variables = _modules.root.variables
+outputs = _modules.root.outputs

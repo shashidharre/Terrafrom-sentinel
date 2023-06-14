@@ -1,0 +1,49 @@
+id = "run-X3fWGiy4wH6NttS3"
+created_at = "2023-06-14T22:50:05.253Z"
+created_by = "shashi0540"
+message = "Triggered via UI"
+commit_sha = "ea19f93b3249faa40897ed1001e854261994c4c9"
+speculative = false
+is_destroy = false
+refresh = true
+refresh_only = false
+replace_addrs = null
+target_addrs = null
+project = {
+	"id":   "prj-zBi3pCidq8EinKmr",
+	"name": "Default Project",
+}
+
+variables = {
+	"GOOGLE_CREDENTIALS": {
+		"category":  "env",
+		"sensitive": false,
+	},
+}
+
+organization = {
+	"name": "Terrafrom_Test",
+}
+
+workspace = {
+	"auto_apply":     false,
+	"created_at":     "2023-06-14T22:30:55.574Z",
+	"description":    "for testing using a storage bucket",
+	"execution_mode": "remote",
+	"id":             "ws-xvqAFNaVyEdpo4eN",
+	"name":           "Terrafrom-sentinel_storagebucket",
+	"tags":           [],
+	"vcs_repo": {
+		"branch":             "",
+		"display_identifier": "shashidharre/Terrafrom-sentinel",
+		"identifier":         "shashidharre/Terrafrom-sentinel",
+		"ingress_submodules": false,
+	},
+	"working_directory": "",
+}
+
+cost_estimate = {
+	"delta_monthly_cost":    "0.0",
+	"prior_monthly_cost":    "0.0",
+	"proposed_monthly_cost": "0.0",
+}

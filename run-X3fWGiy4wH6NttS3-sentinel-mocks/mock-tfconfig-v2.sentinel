@@ -1,0 +1,98 @@
+import "strings"
+
+providers = {
+	"google": {
+		"alias": "",
+		"config": {
+			"project": {
+				"constant_value": "celtic-origin-388318",
+			},
+			"region": {
+				"constant_value": "us-central1",
+			},
+			"zone": {
+				"constant_value": "us-central1-c",
+			},
+		},
+		"full_name":           "registry.terraform.io/hashicorp/google",
+		"module_address":      "",
+		"name":                "google",
+		"provider_config_key": "google",
+		"version_constraint":  "4.52.0",
+	},
+}
+
+resources = {
+	"google_storage_bucket.static": {
+		"address": "google_storage_bucket.static",
+		"config": {
+			"location": {
+				"constant_value": "US",
+			},
+			"name": {
+				"constant_value": "TF_demo",
+			},
+			"storage_class": {
+				"constant_value": "STANDARD",
+			},
+			"uniform_bucket_level_access": {
+				"constant_value": true,
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "static",
+		"provider_config_key": "google",
+		"provisioners":        [],
+		"type":                "google_storage_bucket",
+	},
+	"google_storage_bucket_object.default": {
+		"address": "google_storage_bucket_object.default",
+		"config": {
+			"bucket": {
+				"references": [
+					"google_storage_bucket.static.id",
+					"google_storage_bucket.static",
+				],
+			},
+			"content_type": {
+				"constant_value": "text/plain",
+			},
+			"name": {
+				"constant_value": "sample_file.txt",
+			},
+			"source": {
+				"constant_value": "~/terraform/sample_file.txt",
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "default",
+		"provider_config_key": "google",
+		"provisioners":        [],
+		"type":                "google_storage_bucket_object",
+	},
+}
+
+provisioners = {}
+
+variables = {}
+
+outputs = {}
+
+module_calls = {}
+
+strip_index = func(addr) {
+	s = strings.split(addr, ".")
+	for s as i, v {
+		s[i] = strings.split(v, "[")[0]
+	}
+
+	return strings.join(s, ".")
+}
