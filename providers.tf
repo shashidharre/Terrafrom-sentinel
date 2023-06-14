@@ -7,8 +7,7 @@ terraform {
     }
 }
 
-provider "google"
- {
+provider "google" {
 project = "celtic-origin-388318"
 region = "us-central1"
 zone = "us-central1-c"
