@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-project = "celtic-origin-388318"
+project = "skilled-display-388222"
 region = "us-central1"
 zone = "us-central1-c"
 
