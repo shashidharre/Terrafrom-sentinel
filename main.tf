@@ -12,9 +12,8 @@ resource "google_storage_bucket" "static" {
 # Upload a text file as an object
 # to the storage bucket
 
-resource "google_storage_bucket_object" "shashi_bucket_test" {
- name         = "sample_file.txt"
- #source       = "~/terraform/sample_file.txt"
- content_type = "text/plain"
- bucket       = google_storage_bucket.static.id
+resource "google_storage_bucket_object" "empty_folder" {
+  name   = "empty_folder/" # folder name should end with '/'
+  content = " "            # content is ignored but should be non-empty
+  bucket = "image-store"
 }
