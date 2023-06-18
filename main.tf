@@ -12,7 +12,7 @@ resource "google_storage_bucket" "static" {
 # Upload a text file as an object
 # to the storage bucket
 
-resource "google_storage_bucket_object" "default" {
+resource "google_storage_bucket_object" {
  name         = "sample_file.txt"
  source       = "~/terraform/sample_file.txt"
  content_type = "text/plain"
