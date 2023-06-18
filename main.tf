@@ -14,7 +14,7 @@ resource "google_storage_bucket" "static" {
 
 resource "google_storage_bucket_object" "Shashi1"{
  name         = "sample_file.txt"
- source       = "~/terraform/sample_file.txt"
+ #source       = "~/terraform/sample_file.txt"
  content_type = "text/plain"
  bucket       = google_storage_bucket.static.id
 }
